@@ -14,15 +14,15 @@ dt43_end   = datetime.datetime.strptime('2022-12-31T11:59:59Z', '%Y-%m-%dT%H:%M:
 
 # convert datetime to timestamp
 ts42_start = dt42_start.timestamp()
-ts42_end = dt42_end.timestamp()
+ts42_end   = dt42_end.timestamp()
 ts43_start = dt43_start.timestamp()
-ts43_end = dt43_end.timestamp()
+ts43_end   = dt43_end.timestamp()
 
 # convert timestamp to ticks
 start42 = int(ts42_start * 10000000)
-end42 = int(ts42_end * 10000000)
+end42   = int(ts42_end * 10000000)
 start43 = int(ts43_start * 10000000)
-end43 = int(ts43_end * 10000000)
+end43   = int(ts43_end * 10000000)
 
 print(f"epoch 42: {start42} - start")
 print(f"epoch 42: {end42} - end")
