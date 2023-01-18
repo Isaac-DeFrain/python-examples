@@ -33,16 +33,19 @@ if __name__ == "__main__":
         query = q.read().strip()
         q.close()
 
-    # TODO correct authentication method
-    hdrs = { "Authentication": auth_token }
-    client = pgc.GraphqlClient(endpoint=GITHUB_GRAPHQL, headers=hdrs)
+    headers = {
+        "Accept": "application/json",
+        "Authorization": f"bearer {auth_token}"
+    }
+    client = pgc.GraphqlClient(endpoint=GITHUB_GRAPHQL, headers=headers)
 
-    # print query and result
+    # print query
     print("~~~~~~~~~~~~~")
     print("~~~ Query ~~~")
     print("~~~~~~~~~~~~~")
     print(query)
 
+    # print result
     print("~~~~~~~~~~~~~~")
     print("~~~ Result ~~~")
     print("~~~~~~~~~~~~~~")
@@ -61,6 +64,7 @@ if __name__ == "__main__":
         print(res[msg])
         print(f"See {res[url]} for more information")
         sys.exit(1)
+
     else:
         print(json.dumps(res, indent=4))
         sys.exit(0)
