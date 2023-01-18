@@ -1,6 +1,8 @@
 #!/usr/bin python3
 
-from modular import inverse
+import modular_inverse as mi
+
+# TODO class
 
 # check that y^2 = x^3 + a * x + b (mod n)
 def _check(x, y, a, b, n):
@@ -23,7 +25,7 @@ def _sqrt(a, n):
 # print length
 def _points(a, b, n):
     check = lambda x, y: _check(x, y, a, b, n)
-    pts = [(-1, -1)]
+    pts = [(int(-1), int(-1))]
     for y in range(0, n):
         for x in range(0, n):
             if check(x, y): pts.append((x, y))
@@ -45,8 +47,8 @@ def _add(p, q, a, n):
     if p == (-1, -1): return q
     if q == (-1, -1): return p
     # otherwise
-    lam = ((3 * x1 ** 2 + a) * inverse(2 * y1, n)
-        if p == q else (y2 - y1) * inverse(x2 - x1, n))
+    lam = ((3 * x1 ** 2 + a) * mi.inverse(2 * y1, n)
+        if p == q else (y2 - y1) * mi.inverse(x2 - x1, n))
     x3 = (lam ** 2 - x1 - x2) % n
     y3 = (lam * (x1 - x3) - y1) % n
     return x3, y3
@@ -55,7 +57,8 @@ def _scalar_mult(k, p, a, n):
     if k == 0: return (-1, -1)
     if k == 1: return p
     if k > 1: return _add(p, _scalar_mult(k - 1, p, a, n), a, n)
-    else: raise Exception
+    else:
+        raise Exception
 
 # functions for working with the elliptic curve:
 #   y^2 = x^3 + ax + b (mod n)
